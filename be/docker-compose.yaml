@@ -23,7 +23,7 @@ services:
       dockerfile: Dockerfile
     container_name: jt_backend
     # command: sh -c "python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
-    command: sh -c "python3 manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python3 manage.py migrate && python manage.py runserver"
     restart: always
     volumes:
       - .:/app

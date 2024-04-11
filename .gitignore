@@ -18,7 +18,6 @@ coverage
 
 __pycache__
 __init__.py
-migrations
 
 be/data
 be/_docker_data

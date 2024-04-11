@@ -17,7 +17,6 @@ coverage
 *.environment
 
 __pycache__
-__init__.py
 
 be/data
 be/_docker_data

@@ -16,11 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .routes import customer, product
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("customer/", customer.index, name="index"),
-    path("product/", product.index, name="index"),
+    path('customers/', include('customers.urls')),
+    path('products/', include('products.urls')),
 ]

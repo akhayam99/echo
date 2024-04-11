@@ -17,22 +17,22 @@ services:
       timeout: 20s
       retries: 10
 
-  # backend:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: backend
-  #   command: sh -c "python manage.py migrate && python manage.py runserver"
-  #   restart: always
-  #   volumes:
-  #     - .:/app
-  #   ports:
-  #     - "8000:8000"
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver"
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      database:
+        condition: service_healthy
 
 volumes:
   _docker_data:

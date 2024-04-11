@@ -1,8 +1,8 @@
 <script lang="ts">
-import CustomerList from '@/views/customer/list/CustomerList.vue'
 import LoaderComponent from '@/components/loader/LoaderComponent.vue'
 import { loadCustomers } from '@/service/customer.service'
 import type { Customer } from '@/types/Customer'
+import CustomerList from '@/views/customer/list/CustomerList.vue'
 
 export default {
   components: { LoaderComponent, CustomerList },
@@ -17,7 +17,7 @@ export default {
     async getCustomers() {
       this.loading = true
       await new Promise(resolve => setTimeout(resolve, 500))
-      this.customers = await loadCustomers()
+      this.customers = await loadCustomers().finally(() => this.loading = false)
     }
   },
   beforeMount() {

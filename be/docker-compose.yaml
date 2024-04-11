@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  db:
+  database:
     image: mysql:8.3
-    container_name: jt_database
+    container_name: database
     restart: unless-stopped
     volumes:
-      - ./data:/var/lib/mysql
+      - ./_docker_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -17,23 +17,22 @@ services:
       timeout: 20s
       retries: 10
 
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: jt_backend
-    # command: sh -c "python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
-    command: sh -c "python3 manage.py migrate && python manage.py runserver"
-    restart: always
-    volumes:
-      - .:/app
-    ports:
-      - "8000:8000"
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
+  # backend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: backend
+  #   command: sh -c "python manage.py migrate && python manage.py runserver"
+  #   restart: always
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - "8000:8000"
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
 
 volumes:
-  data:
+  _docker_data:

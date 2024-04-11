@@ -1,5 +1,12 @@
 from django.http import JsonResponse
 
+def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+
+
+
 def index(request):
     return JsonResponse([
     {

@@ -1,6 +1,7 @@
 <script  lang="ts">
 import LoaderComponent from '@/components/loader/LoaderComponent.vue'
-import { loadProducts } from '@/service/product.service.ts'
+import { loadProducts } from '@/service/product.service'
+import type { Product } from '@/types/Products'
 import ProductList from '@/views/product/list/ProductList.vue'
 
 export default {
@@ -9,7 +10,7 @@ export default {
     return {
       title: 'Products',
       loading: false,
-      products: []
+      products: [] as Product[],
     }
   },
   methods: {

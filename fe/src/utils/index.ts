@@ -1,10 +1,5 @@
 import { ValidRoute } from '@/enum/ValidRoute'
 import type { AppRoute } from '@/types/AppRouter'
-import type { AxiosResponse } from 'axios'
-
-export function dataFromResponse<T>(obj: AxiosResponse<T>): T {
-  return obj.data as T
-}
 
 export function appRoutesObj(): AppRoute[] {
   return Object.values(ValidRoute).map((path, id) => ({

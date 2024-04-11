@@ -1,9 +1,12 @@
 import type { Product } from '@/types/Products'
-import { dataFromResponse } from '@/utils'
-import { apiClient } from './api-client.service'
+import { loadItem, loadList } from './_crud.service'
 
 const endpoint = 'product'
 
-export function loadProducts(): Promise<Product[]> {
-  return apiClient.get<Product[]>(endpoint).then(dataFromResponse)
+export async function loadProducts(): Promise<Product[]> {
+  return loadList(`${endpoint}`)
+}
+
+export async function loadProduct(id: string): Promise<Product> {
+  return loadItem(`${endpoint}`, id)
 }

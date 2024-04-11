@@ -1,6 +1,5 @@
 <script setup lang="ts">
-  import type { Product } from '@/types/Products'
-
+  import type { Product } from '@/types/Products';
   const props = defineProps<{
     list: Product[] | null
   }>()

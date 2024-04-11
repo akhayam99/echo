@@ -1,8 +1,11 @@
 <script>
 export default {
+  data() {
+    return {};
+  },
   methods: {
     titlePath(text) {
-      return text.replace('/','').replace(/\b\w/g, c => c.toUpperCase());
+      return text.replace('/', '').replace(/\b\w/g, c => c.toUpperCase());
     }
   }
 };

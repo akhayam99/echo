@@ -3,9 +3,10 @@ import LoaderComponent from '@/components/loader/LoaderComponent.vue'
 import {loadProducts} from '@/service/products.service'
 import type {Product} from '@/types/Products'
 import ProductList from '@/views/product/list/ProductList.vue'
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 export default {
-  components: {ProductList, LoaderComponent},
+  components: {FontAwesomeIcon, ProductList, LoaderComponent},
   data() {
     return {
       loading: false,
@@ -21,6 +22,14 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    uniqueCustomers(products: Product[]) {
+      return products.reduce((prev, curr) => {
+        if (prev.includes(curr.customer_id)) {
+          return prev;
+        }
+        return [...prev, curr.customer_id];
+      }, [] as string[]).length;
     }
   },
   beforeMount() {
@@ -32,7 +41,21 @@ export default {
 <template>
   <main>
     <div class="card">
-      <h1>Prodotti</h1>
+      <h1> Prodotti </h1>
+      <div class="info">
+        <div class="title"> Totale prodotti </div>
+        <div class="value">
+          <span v-if="products.length"> {{ products.length }} </span>
+          <span v-else> --- </span>
+        </div>
+      </div>
+      <div class="info">
+        <div class="title"> Clienti unici </div>
+        <div class="value">
+          <span v-if="products.length"> {{ uniqueCustomers(products) }} </span>
+          <span v-else> --- </span>
+        </div>
+      </div>
     </div>
     <LoaderComponent v-if="loading"/>
     <ProductList :list="products" v-else/>
@@ -48,8 +71,29 @@ main {
 }
 
 .card {
-  border: 1px solid var(--border--base);
+  align-items: center;
   border-radius: 4px;
+  border: 1px solid var(--border--base);
+  display: flex;
+  flex-direction: row;
   padding: 32px;
+  gap: 40px;
+  justify-content: space-around;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .title {
+      font-size: 16px;
+      color: var(--text--secondary);
+    }
+
+    .value {
+      font-size: 24px;
+      color: var(--text-primary);
+    }
+  }
 }
 </style>

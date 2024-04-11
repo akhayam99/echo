@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/home/HomeView.vue'
 import CustomerView from '@/views/customer/CustomerView.vue'
 import ProductView from '@/views/product/ProductView.vue'
-import TbdComponent from "@/components/tbd/TbdComponent.vue";
+import TbdComponent from '@/components/tbd/TbdComponent.vue';
 
 export default createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -1,4 +1,4 @@
-# Logs
+# logs
 logs
 *.log
 npm-debug.log*
@@ -7,26 +7,28 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Backend
+# environment
+*.env
+*.environment
+
+# docker
+_docker_data
+
+# backend
 __pycache__
 
-guardian/data
-guardian/_docker_data
-
-# Frontend
+# frontend
 node_modules
 .DS_Store
 dist
 dist-ssr
 coverage
 *.local
-*.env
-*.environment
 
 /cypress/videos/
 /cypress/screenshots/
 
-# Editor directories and files
+# editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea

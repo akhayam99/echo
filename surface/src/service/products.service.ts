@@ -1,7 +1,7 @@
 import type { Product } from '@/types/Products'
 import { loadItem, loadList } from './_crud.service'
 
-const endpoint = 'product'
+const endpoint = 'products'
 
 export async function loadProducts(): Promise<Product[]> {
   return loadList(`${endpoint}`)

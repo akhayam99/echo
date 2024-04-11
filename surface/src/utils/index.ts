@@ -12,12 +12,12 @@ export function appRoutesObj(): AppRoute[] {
 export function getRouteName(path: ValidRoute): string {
   switch (path) {
     case ValidRoute.HOME:
-      return 'Home'
+      return 'Dashboard'
     case ValidRoute.CUSTOMER:
-      return 'Customer'
+      return 'Clienti'
     case ValidRoute.PRODUCT:
-      return 'Product'
+      return 'Prodotti'
     default:
-      return 'Unknown'
+      return path.replace('/', '').charAt(0).toUpperCase() + path.replace('/', '').slice(1)
   }
 }

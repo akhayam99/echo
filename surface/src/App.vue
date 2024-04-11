@@ -20,8 +20,4 @@ main {
   width: 100%;
   height: 100%;
 }
-
-.content {
-  width: calc(100% - 220px);
-}
 </style>

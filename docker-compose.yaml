@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  vault:
+    image: mysql:8.3
+    container_name: vault
+    restart: unless-stopped
+    volumes:
+      - ./_docker_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=${MYSQL_ROOT_PASSWORD}"]
+      timeout: 20s
+      retries: 10
+
+  # TBD
+
+  # guardian:
+  #   build:
+  #     context: guardian
+  #     dockerfile: Dockerfile
+  #   container_name: guardian
+  #   command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver"
+  #   restart: always
+  #   volumes:
+  #     - ./guardian:/app/guardian
+  #   ports:
+  #     - "8000:8000"
+  #   env_file:
+  #     - guardian/.env
+  #   depends_on:
+  #     vault:
+  #       condition: service_healthy
+
+  # surface:
+  #   build:
+  #     context: surface
+  #     dockerfile: Dockerfile
+  #   container_name: surface
+  #   command: sh -c "npm run dev"
+  #   restart: always
+  #   volumes:
+  #     - ./surface:/app/surface
+  #   ports:
+  #     - "5173:5173"
+  #   env_file:
+  #     - surface/src/environment/environment.ts
+
+volumes:
+  _docker_data:

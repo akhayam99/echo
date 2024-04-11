@@ -1,3 +1,0 @@
-<template>
-  LOADING...
-</template>

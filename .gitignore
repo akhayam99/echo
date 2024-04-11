@@ -7,6 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Backend
+__pycache__
+
+guardian/data
+guardian/_docker_data
+
+# Frontend
 node_modules
 .DS_Store
 dist
@@ -15,12 +22,6 @@ coverage
 *.local
 *.env
 *.environment
-
-__pycache__
-
-be/data
-be/_docker_data
-
 
 /cypress/videos/
 /cypress/screenshots/

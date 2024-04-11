@@ -106,10 +106,12 @@ WSGI_APPLICATION = 'be.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Env doesn't work... need to figure out why
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
+        'NAME': 'vault',
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST':'127.0.0.1',

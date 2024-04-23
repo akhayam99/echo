@@ -1,12 +1,11 @@
 <script lang="ts">
-import LoaderComponent from '@/components/loader/LoaderComponent.vue'
 import {loadProducts} from '@/service/products.service'
 import type {Product} from '@/types/Products'
 import ProductList from '@/views/product/list/ProductList.vue'
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import SpinnerComponent from "@/components/spinner/SpinnerComponent.vue";
 
 export default {
-  components: {FontAwesomeIcon, ProductList, LoaderComponent},
+  components: {SpinnerComponent, ProductList},
   data() {
     return {
       loading: false,
@@ -43,21 +42,21 @@ export default {
     <div class="card">
       <h1> Prodotti </h1>
       <div class="info">
-        <div class="title"> Totale prodotti </div>
+        <div class="title"> Totale prodotti</div>
         <div class="value">
           <span v-if="products.length"> {{ products.length }} </span>
           <span v-else> --- </span>
         </div>
       </div>
       <div class="info">
-        <div class="title"> Clienti unici </div>
+        <div class="title"> Clienti unici</div>
         <div class="value">
           <span v-if="products.length"> {{ uniqueCustomers(products) }} </span>
           <span v-else> --- </span>
         </div>
       </div>
     </div>
-    <LoaderComponent v-if="loading"/>
+    <SpinnerComponent v-if="loading"/>
     <ProductList :list="products" v-else/>
   </main>
 </template>

@@ -1,16 +1,16 @@
 <script lang="ts">
-import LoaderComponent from '@/components/loader/LoaderComponent.vue'
-import {loadCustomers} from '@/service/customers.service'
+import {createCustomer, loadCustomers} from '@/service/customers.service'
 import type {Customer} from '@/types/Customer'
 import CustomerList from '@/views/customer/list/CustomerList.vue'
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import SpinnerComponent from "@/components/spinner/SpinnerComponent.vue";
 
 export default {
-  components: {FontAwesomeIcon, LoaderComponent, CustomerList},
+  components: {SpinnerComponent, FontAwesomeIcon, CustomerList},
   data() {
     return {
       loading: false,
-      customers: [] as Customer[]
+      customers: [] as Customer[],
     }
   },
   methods: {
@@ -18,6 +18,9 @@ export default {
       this.loading = true
       await new Promise(resolve => setTimeout(resolve, 500))
       this.customers = await loadCustomers().finally(() => this.loading = false)
+    },
+    async createCustomer() {
+      await createCustomer()
     }
   },
   beforeMount() {
@@ -41,9 +44,10 @@ export default {
       </div>
       <div class="actions">
         <FontAwesomeIcon @click="getCustomers()" icon="arrows-rotate" class="action"/>
+        <FontAwesomeIcon @click="createCustomer()" icon="plus" class="action"/>
       </div>
     </div>
-    <LoaderComponent v-if="loading"/>
+    <SpinnerComponent v-if="loading"/>
     <CustomerList :list="customers" v-else/>
   </main>
 </template>
@@ -91,13 +95,17 @@ main {
   .actions {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
     justify-content: center;
     width: 40px;
     background-color: var(--green--color-green-light-9);
 
     .action {
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
 
       &:hover {
         scale: 1.1;

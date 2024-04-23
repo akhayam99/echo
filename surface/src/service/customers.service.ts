@@ -1,5 +1,6 @@
 import type { Customer } from '@/types/Customer'
-import { loadItem, loadList } from './_crud.service'
+import {createItem, loadItem, loadList} from './_crud.service'
+
 
 const endpoint = 'customers'
 
@@ -9,4 +10,8 @@ export async function loadCustomers(): Promise<Customer[]> {
 
 export async function loadCustomer(id: string): Promise<Customer> {
   return loadItem(`${endpoint}`, id)
+}
+
+export async function createCustomer(): Promise<Customer>{
+  return createItem(`${endpoint}`)
 }
